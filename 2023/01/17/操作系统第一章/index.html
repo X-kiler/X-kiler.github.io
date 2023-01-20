@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-4e60d744e3f29eb62a3c42682d4c1b86_r.jpg">
 <meta property="article:published_time" content="2023-01-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-18T06:33:26.737Z">
+<meta property="article:modified_time" content="2023-01-20T12:16:37.947Z">
 <meta property="article:author" content="Wisher">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-18 14:33:26" itemprop="dateModified" datetime="2023-01-18T14:33:26+08:00">2023-01-18</time>
+                <time title="修改时间：2023-01-20 20:16:37" itemprop="dateModified" datetime="2023-01-20T20:16:37+08:00">2023-01-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
 <p>中断服务程序过程：①保护现场 ②开中断 ③中断处理 ④关中断 ⑤恢复现场 ⑥开放中断 ⑦中断返回</p>
 <p>（4）异常：内中断，指主机内部产生的程序中止，通常由CPU正在执行的指令引发，如系统功能调用、缺页异常、存储器越界访问、运算引发的错误（溢出，除数为零）。</p>
 <p>①陷阱（trap） ②故障（fault） ③终止（abort）</p>
-<h3 id="2，系统调用"><a href="#2，系统调用" class="headerlink" title="2，系统调用"></a>2，系统调用</h3><p>用户程序发送给操作系统，请求其提供服务的方法或函数</p>
+<h3 id="2，系统调用"><a href="#2，系统调用" class="headerlink" title="2，系统调用"></a>2，系统调用</h3><p>用户程序发送给操作系统，请求其提供服务的<font color=Red>方法或函数</font></p>
 <p>（1）背景：一般情况下用户进程不能访问内核，包括内核所占内存空间和内核函数。为保证计算机系统的正常安全运行，操作系统为用户程序提供接口，即系统调用，使得用户程序可以方便的使用硬件等操作系统管理的资源。</p>
 <p>（2）作用：操作系统提供给用户程序调用其提供底层服务的方式，是用户程序访问内核的途径。</p>
 <p>（3）使用途径：高级语言通过库函数提供，汇编语言通过中断调用提供</p>
@@ -286,15 +286,16 @@
 <p>适用：单道程序环境</p>
 <p>优点：目标代码的执行速度快</p>
 <p>缺点：受内存空间大小的限制，能装入内存并发执行的进程数较少，编译程序必须了解内存</p>
-<p>②重定位方式：每个目标代码均危机与自己的零地址空间，装入内存时进行重新定位。多道程序环境下，编译程序无法预知所编译的目标模块在内存中的具体存储位置。因此，通常将所有目标模块均从0开始编址，即多道程序对于多个目标模块，具有多个零地址空间，而内存是一个零地址的物理空间，故多个目标模块装入内存时需要重新定位。转换地址可由硬件实现，也可由软件实现（无需设置辅助寄存器）。</p>
+<p>②<font color=Red>重定位方式</font>：每个目标代码均危机与自己的零地址空间，装入内存时进行重新定位。多道程序环境下，编译程序无法预知所编译的目标模块在内存中的具体存储位置。因此，通常将所有目标模块均从0开始编址，即多道程序对于多个目标模块，具有多个零地址空间，而内存是一个零地址的物理空间，故多个目标模块装入内存时需要重新定位。转换地址可由硬件实现，也可由软件实现（无需设置辅助寄存器）。</p>
 <p>重定位的类型：</p>
-<p>a，静态重定位 b，动态重定位</p>
+<p>a，静态重定位 </p>
+<p>b，动态重定位</p>
 <h3 id="5，CPU运行模式"><a href="#5，CPU运行模式" class="headerlink" title="5，CPU运行模式"></a>5，CPU运行模式</h3><p>操作系统是重要的系统软件，运行时需占据内存空间（内核空间），并被所有程序所共享；同时，应用软件运行时也占据内存空间（用户空间）属于私有空间。为避免较大的时间开销，两者共存于同一片地址空间，使得用户程序需要访问内核空间时仅需要进行模式切换，无需切换进程。为确保数据安全，CPU具有不同的运行模式，常见的运行模式有内核模式和用户模式两种。</p>
 <p>（1）内核模式又称为核心态或管态，是核心操作系统组件和大部分驱动程序运行时所处于的模式。特点为所有内核代码共享内核模式的虚拟地址空间，存在不按因素，需要提供保护措施，进制随意访问，可使用所有系统资源及所有外部设备，存储器等可执行的所有机器命令指令，包括通用指令和特权指令。</p>
 <p>通用指令又称非特权指令，指用户程序看使用的机器指令</p>
-<p>通用指令有：访管指令，读取时钟指令，控制转移指令，数据传送指令，算数逻辑运算指令，以及存数、取数指令。</p>
+<p><font color=Red>通用指令</font>有：访管指令，读取时钟指令，控制转移指令，数据传送指令，算数逻辑运算指令，以及存数、取数指令。</p>
 <p>特权指令是只能由操作系统使用的指令</p>
-<p>特权指令有：启动I&#x2F;O指令，内存清除，设置时钟，启动设备，停机指令，允许&#x2F;禁止中断，控制中断屏蔽位，修改程序状态字PSW，改变存储影响图指令</p>
+<p><font color=Red>特权指令</font>有：启动I&#x2F;O指令，内存清除，设置时钟，启动设备，停机指令，允许&#x2F;禁止中断，控制中断屏蔽位，修改程序状态字PSW，改变存储影响图指令</p>
 <p>（2）用户模式又称用户态或目态，是用户程序（应用程序）和某些驱动程运行时所处于的模式。</p>
 <p>特点：为各应用程序执行时具有私有虚拟地址空间，互不干扰，只能访问私有虚拟地址空间，即有限的存储空间，指定的寄存器；只能执行通用指令，不能执行特权指令。</p>
 <p>根据运行的程序类型，CPU可在两个模式之间自动切换</p>
@@ -312,18 +313,18 @@
 <p>②缺点：模块及接口划分较为困难，未区分共享资源和独占资源；由于管理的差异操作系统结构话可能不够清晰</p>
 <p>（3）分层结构：将操作系统划分为若干层次，每层仅调用其底层嗦提供的功能和服务</p>
 <p>特点：调试和验证更容易，正确性更高；每层的设计均建立在可靠的底层基础上，结构更清晰；从硬件开始在其逐层自底向上增添相应软件。</p>
-<h3 id="2，内核结构"><a href="#2，内核结构" class="headerlink" title="2，内核结构"></a>2，内核结构</h3><p>（1）宏内核结构：又称单内核，采用模块化思想设计，操作系统将一些基本的，公共的和硬件紧密相关的（中断处理，内存管理，设备驱动，文件系统等）、运行频次较高的（如进程调度，时钟管理等）功能及关键数据结构独立出来，形成一个常驻内存的内核，模块间通过直接调用接口函数实现通信。</p>
+<h3 id="2，内核结构"><a href="#2，内核结构" class="headerlink" title="2，内核结构"></a>2，内核结构</h3><p>（1）<font color=Red>宏</font>内核结构：又称单内核，采用模块化思想设计，操作系统将一些基本的，公共的和硬件紧密相关的（中断处理，内存管理，设备驱动，文件系统等）、运行频次较高的（如进程调度，时钟管理等）功能及关键数据结构独立出来，形成一个常驻内存的内核，模块间通过直接调用接口函数实现通信。</p>
 <p>①实例：UNIX操作系统，Linux操作系统</p>
 <p>②缺点：可靠性和安全性岁操作系统复杂性的增加而降低；由于内核较大，包含较多功能，一个问题的出现可能导致系统瘫痪</p>
-<p>（2）微内核结构：操作系统内核仅保留最基本的功能（如进程调用，内存管理等），其他服务（如设备驱动，文件系统等）均分离出去，由工作在用户态的进程实现，客户进程通过内核向服务器进程发送请求，获取操作系统服务。</p>
+<p>（2）<font color=Red>微</font>内核结构：操作系统内核仅保留最基本的功能（如进程调用，内存管理等），其他服务（如设备驱动，文件系统等）均分离出去，由工作在用户态的进程实现，客户进程通过内核向服务器进程发送请求，获取操作系统服务。</p>
 <p>①构成：一个微内核和多个服务器</p>
 <p>②适用场合：分布式系统；支持多处理机运行的操作系统</p>
 <p>③实例：Windows 2000&#x2F;xp操作系统；Mach OS操作系统</p>
-<p>④特点：基于“客户端&#x2F;服务器”模式；应用“机制与策略分离”原理；足够小的内核由操作系统最基本的部分构成（进程&#x2F;线程管理，低级存储器管理，中断和陷入处理）</p>
+<p>④特点：基于“客户端&#x2F;服务器”模式；应用“<font color=Red>机制与策略分离</font>”原理；足够小的内核由操作系统最基本的部分构成（进程&#x2F;线程管理，低级存储器管理，中断和陷入处理）</p>
 <p>④优点：较强的可移植性；增强系统的可靠性；融入了面向对象技术；提高了系统的可扩展性；提供了对分布式系统的支持</p>
 <p>⑤缺点：系统效率降低</p>
 <p>（3）外核结构：Exokernel Architerture，也称外内核结构。</p>
-<p>①构成：Exokernel ，内核，仅提供有效的源于，运行于核心态，为虚拟机分配资源；Library OS，外核，实现进程，存储等资源管理的应用程序，确保虚拟机间无冲突。</p>
+<p>①构成：Exokernel ，内核，仅提供<font color=Red>有限的</font>原语，运行于核心态，为虚拟机分配资源；Library OS，外核，实现进程，存储等资源管理的应用程序，确保虚拟机间无冲突。</p>
 <p>②特点：</p>
 <p>a，效率高，内核极小</p>
 <p>b，每个虚拟机可运行专属，定制的操作系统，仅管理和使用内核所分配的资源，管理复杂度和代价降低</p>
@@ -331,7 +332,20 @@
 <p>d，将资源分配和资源管理分离（资源分配由内核完成；资源管理有外核的程序负责，便于扩展、修改）</p>
 <h2 id="（五）、操作系统引导"><a href="#（五）、操作系统引导" class="headerlink" title="（五）、操作系统引导"></a>（五）、操作系统引导</h2><p>操作系统安装于硬盘，开机后自动加载至内存运行，为用户提供服务。其启动流程如下:</p>
 <p>（1）引导：CPU加电后会首先执行基本输入&#x2F;输出系统程序（BIOS，存储于ROM，也可以存储于闪存），完成操作系统引导工作，将启动盘的引导程序读入内存。</p>
-<p>①初始化存储器：</p>
+<p>①初始化存储器：（CS）&#x3D;0XFFFF，其他寄存器值为0<br>说明：CS：IP的值是将要执行的指令JMP的逻辑地址0XFFFF：0X0000（其物理地址为0XFFFF0），无条件转移指令跳转至BIOS的启动代码所在位置。</p>
+<p>②自检：检测系统关键设备是否存在，是否正常，出现异常则中止启动</p>
+<p>③将BIOS复制至内存，并执行</p>
+<p>④受训可引导的存储设备：根据CMOS中用户设置的引导顺序搜索启动设备（软盘，硬盘，可移动设备等），找到则根据该设备的引导扇区内容（主引导记录），将磁盘引导程序Boot读入内存，控制权转给操作系统。</p>
+<p>（2）执行磁盘引导程序：启动盘主扇区转活动引导扇区内容。将活动分区引导扇区的内容读入内存并执行；将加载程序Loader.bin读入内存。</p>
+<p>（3）执行磁盘分区加载程序：操作系统内核Kernel.dll加载内核至内存。主要完成检测内存大小，为内核准备保护密室，执行环境、加载内核等工作。</p>
+<p>（4）操作系统初始化：初始化处理器、中断，各管理模块等；创建主进程；启动控制台。</p>
+<h2 id="（六）、虚拟机"><a href="#（六）、虚拟机" class="headerlink" title="（六）、虚拟机"></a>（六）、虚拟机</h2><p>（1）虚拟计算机：通过软件模拟的，运行在隔离环境中的，<font color=Red>完整的</font>计算机系统可以相使用实体机一样对虚拟机进行操作</p>
+<p>①虚拟机软件：VMare，Virtual Box，Virtual PC，可在Windows操作系统上虚拟出多个计算机，每个“计算机”可安装不太的系统</p>
+<p>②示例：Windows操作系统上安装虚拟Linux</p>
+<p>a，启动VMare软件，在“主页”选项卡单机“新建虚拟机”按钮</p>
+<p>b，安装向导提示完成安装（在Windows，Linux，Novell等选项中选择Linux选项）</p>
+<p>③在一台计算机上可食用多个操作系统</p>
+<p>（2）高级语言虚拟机：高级语言解释器。</p>
 
     </div>
 
@@ -439,7 +453,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%AA%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">一、绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">（一）、操作系统的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1，操作系统的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">2，操作系统的基本特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.3.</span> <span class="nav-text">3，操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%EF%BC%88%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">（二）、操作系统的发展历程（分类）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E6%97%A0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">1，无操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E5%8D%95%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2，单道批处理操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E5%A4%9A%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.3.</span> <span class="nav-text">3，多道批处理操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%8C%E5%88%86%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">4，分时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%8C%E5%AE%9E%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">5，实时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%8C%E5%BE%AE%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.6.</span> <span class="nav-text">6，微机操作系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">（三）、程序运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">1，中断和异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">2，系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E6%98%A0%E5%83%8F%E4%B8%8E%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.3.</span> <span class="nav-text">3，程序运行时内存映像与地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%BE%91%E3%80%81%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="nav-number">1.3.4.</span> <span class="nav-text">4，程序的编辑、编译和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%8CCPU%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.5.</span> <span class="nav-text">5，CPU运行模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.</span> <span class="nav-text">（四）、操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E9%9D%9E%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">1，非内核结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">2，内核结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="nav-number">1.5.</span> <span class="nav-text">（五）、操作系统引导</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%AA%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">一、绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">（一）、操作系统的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1，操作系统的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">2，操作系统的基本特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.3.</span> <span class="nav-text">3，操作系统的主要功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B%EF%BC%88%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">（二）、操作系统的发展历程（分类）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E6%97%A0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">1，无操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E5%8D%95%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2，单道批处理操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E5%A4%9A%E9%81%93%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.3.</span> <span class="nav-text">3，多道批处理操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%8C%E5%88%86%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">4，分时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%8C%E5%AE%9E%E6%97%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">5，实时系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%EF%BC%8C%E5%BE%AE%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.6.</span> <span class="nav-text">6，微机操作系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E3%80%81%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">（三）、程序运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">1，中断和异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">2，系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%EF%BC%8C%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E6%98%A0%E5%83%8F%E4%B8%8E%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">1.3.3.</span> <span class="nav-text">3，程序运行时内存映像与地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%EF%BC%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%BE%91%E3%80%81%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5"><span class="nav-number">1.3.4.</span> <span class="nav-text">4，程序的编辑、编译和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%EF%BC%8CCPU%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.5.</span> <span class="nav-text">5，CPU运行模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.</span> <span class="nav-text">（四）、操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%EF%BC%8C%E9%9D%9E%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">1，非内核结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%EF%BC%8C%E5%86%85%E6%A0%B8%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">2，内核结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BC%95%E5%AF%BC"><span class="nav-number">1.5.</span> <span class="nav-text">（五）、操作系统引导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%88%E5%85%AD%EF%BC%89%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.6.</span> <span class="nav-text">（六）、虚拟机</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
